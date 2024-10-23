@@ -1,5 +1,3 @@
-Makefile
 /target
 **/debug/
 Cargo.lock
-*.rs
