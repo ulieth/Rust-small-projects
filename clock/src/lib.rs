@@ -68,8 +68,51 @@ mod tests {
     #[test]
     fn on_the_hour() {
         assert_eq!(Clock::new(8, 0).to_string(), "08:00");
-  }
+    }
+    #[test]
     fn past_the_hour() {
         assert_eq!(Clock::new(11, 9).to_string(), "11:09");
-}
+    }
+    #[test]
+    fn hour_rolls_over_continuously() {
+        assert_eq!(Clock::new(100, 0).to_string(), "04:00");
+    }
+    #[test]
+    fn sixty_minutes_is_next_hour() {
+        assert_eq!(Clock::new(1, 60).to_string(), "02:00");
+    }
+    #[test]
+    fn negative_hour() {
+        assert_eq!(Clock::new(-1, 15).to_string(), "23:15");
+    }
+    #[test]
+    fn negative_hour_rolls_over() {
+        assert_eq!(Clock::new(-25, 0).to_string(), "23:00");
+    }
+    #[test]
+    fn negative_hour_rolls_over_continuously() {
+        assert_eq!(Clock::new(-91, 0).to_string(), "05:00");
+    }
+    #[test]
+    fn negative_minutes() {
+        assert_eq!(Clock::new(1, -40).to_string(), "00:20");
+    }
+    #[test]
+    fn negative_minutes_roll_over() {
+        assert_eq!(Clock::new(1, -160).to_string(), "22:20");
+    }
+    #[test]
+    fn negative_minutes_roll_over_continuously() {
+        assert_eq!(Clock::new(1, -4820).to_string(), "16:40");
+    }
+    #[test]
+    fn add_minutes() {
+        let clock = Clock::new(10, 0).add_minutes(3);
+        assert_eq!(clock.to_string(), "10:03");
+    }
+    #[test]
+    fn add_no_minutes() {
+        let clock = Clock::new(6, 41).add_minutes(0);
+        assert_eq!(clock.to_string(), "06:41");
+    }
 }
