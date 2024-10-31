@@ -1,6 +1,10 @@
 use std::collections::HashSet;
 
 pub fn anagrams_for<'a>(word: &str, possible_anagrams:&'a [&str]) -> HashSet<&'a str> {
+    // Return early for empty input word
+    if word.is_empty() {
+        return HashSet::new();
+    }
     // Normalize the input word by sorting its characters
     let mut sorted_word: Vec<char> = word.to_lowercase().chars().collect();
     sorted_word.sort();
@@ -54,6 +58,14 @@ mod tests {
         let inputs = &["Eons", "ONES"];
         let output = anagrams_for(word, inputs);
         let expected = HashSet::from_iter(["Eons", "ONES"]);
+        assert_eq!(output, expected);
+    }
+    #[test]
+    fn handles_empty_input() {
+        let word = "";
+        let inputs = &[""];
+        let output = anagrams_for(word, inputs);
+        let expected: HashSet<&str> = HashSet::from_iter([]);
         assert_eq!(output, expected);
     }
 }
