@@ -38,4 +38,13 @@ mod tests {
         let expected = HashSet::from_iter(["lemons", "melons"]);
         assert_eq!(output, expected);
     }
+    #[test]
+    #[ignore]
+    fn words_are_not_anagrams_of_themselves() {
+        let word = "BANANA";
+        let inputs = &["BANANA"];
+        let output = anagrams_for(word, inputs);
+        let expected = HashSet::from_iter([]);
+        assert_eq!(output, expected);
+    }
 }
