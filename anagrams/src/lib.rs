@@ -47,4 +47,13 @@ mod tests {
         let expected = HashSet::from_iter([]);
         assert_eq!(output, expected);
     }
+    #[test]
+    #[ignore]
+    fn detects_multiple_anagrams_with_different_case() {
+        let word = "nose";
+        let inputs = &["Eons", "ONES"];
+        let output = anagrams_for(word, inputs);
+        let expected = HashSet::from_iter(["Eons", "ONES"]);
+        assert_eq!(output, expected);
+    }
 }
