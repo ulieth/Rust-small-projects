@@ -1,12 +1,28 @@
 pub fn abbreviate(phrase: &str) -> String {
-    let cleaned = phrase.replace('\'', "");
+  let mut result = String::new();
+   let cleaned = phrase.replace('\'', "");
+   let chars: Vec<char> = cleaned.chars().collect();
 
-    // Then split on non-alphabetic characters and collect first letters
-    cleaned
-        .split(|c: char| !c.is_alphabetic())
-        .filter(|word| !word.is_empty())
-        .map(|word| word.chars().next().unwrap().to_ascii_uppercase())
-        .collect()
+   // Add first character if string is not empty
+   if let Some(&first) = chars.first() {
+       result.push(first.to_ascii_uppercase());
+   }
+
+   // Process rest of the characters
+   for i in 1..chars.len() {
+       let current = chars[i];
+       let prev = chars[i - 1];
+
+       // Add character if:
+       // 1. Previous char is space/non-alphabetic and current is alphabetic
+       // 2. Current is uppercase and previous is lowercase (camelCase)
+       if (!prev.is_alphabetic() && current.is_alphabetic()) ||
+          (current.is_uppercase() && prev.is_lowercase()) {
+           result.push(current.to_ascii_uppercase());
+       }
+   }
+
+   result
 }
 
 #[cfg(test)]
@@ -35,5 +51,13 @@ mod tests {
         let output = abbreviate(input);
         let expected = "HC";
         assert_eq!(output, expected);
-}
+    }
+
+    #[test]
+    fn camelcase() {
+        let input = "HyperText Markup Language";
+        let output = abbreviate(input);
+        let expected = "HTML";
+        assert_eq!(output, expected);
+    }
 }
