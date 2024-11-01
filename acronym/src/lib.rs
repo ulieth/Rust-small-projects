@@ -1,12 +1,12 @@
 pub fn abbreviate(phrase: &str) -> String {
-  // Split the phrase using non-alphanumeric characters as delimiters
-  let acronym: String = phrase
-  .split(|c: char| !c.is_alphanumeric()) // Split on non-alphanumeric characters
-  .filter_map(|word| word.chars().next()) // Collect the first letter of each word
-  .map(|c| c.to_ascii_uppercase()) // Convert to uppercase
-  .collect(); // Collect into a String
+    let cleaned = phrase.replace('\'', "");
 
-  acronym
+    // Then split on non-alphabetic characters and collect first letters
+    cleaned
+        .split(|c: char| !c.is_alphabetic())
+        .filter(|word| !word.is_empty())
+        .map(|word| word.chars().next().unwrap().to_ascii_uppercase())
+        .collect()
 }
 
 #[cfg(test)]
@@ -28,4 +28,12 @@ mod tests {
         let expected = "FIFO";
         assert_eq!(output, expected);
     }
+
+    #[test]
+    fn apostrophes() {
+        let input = "Halley's Comet";
+        let output = abbreviate(input);
+        let expected = "HC";
+        assert_eq!(output, expected);
+}
 }
