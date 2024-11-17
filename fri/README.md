@@ -11,8 +11,8 @@ In the first rounds, the prover sends only the Merkle tree root, not all the dat
 The security of FRI relies on the binding property of the Merkle commitments and the soundness of the "folding" operation with random challenges.Verification time is logarithmic in polynomial degree
 
 This code implements FRI (Fast Reed-Solomon Interactive Oracle Proofs). The code implements two main components:
-- FRI Low Degree Testing (FRI_LDT)
-- FRI Polynomial Commitment Scheme (FRI_PCS)
+- FRI Low Degree Testing (FRI_LDT) to prove that a polynomial has a claimed degree.
+- FRI Polynomial Commitment Scheme (FRI_PCS) allows committing to a polynomial and later proving its evaluation at a point.
 
 ### References
 Paul Gafni, *FRI Mechanics: Folding, Committing, and Batching*;
