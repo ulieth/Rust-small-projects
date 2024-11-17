@@ -1,8 +1,10 @@
-
-// DenseUVPolynomial is a trait from the ark-poly library
+use ark_ff::PrimeField;
+use ark_poly::{
+    univariate::DensePolynomial, DenseUVPolynomial, EvaluationDomain, GeneralEvaluationDomain,
+};
+// DenseUVPolynomial is a trait from the ark_poly library
 // that defines the behavior for univariate polynomials stored in dense form.
-// The use of DenseUVPolynomial for splitting operation
-// since with dense representation it's easier to access coefficients by their position.
+// Makes it easier to access coefficients by their position.
 struct FRI_LDT<F: PrimeField, P: DenseUVPolynomial<F>, H: Hash<F>> {
   _f: PhantomData<F>,     // PhantomData is used because the struct doesn't actually store any data of these types,
   _poly: PhantomData<P>,  // but needs to "remember" the types for its methods.
