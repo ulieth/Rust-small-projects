@@ -8,6 +8,8 @@ use ark_poly::{
 use transcript::Transcript;
 
 // rho^-1
+// to determine the size of the evaluation domain in relation to the polynomial degree
+// Could be adjusted based on security requirements
 const rho1: usize = 8;
 
 pub struct LDTProof<F: PrimeField> {
