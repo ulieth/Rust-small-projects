@@ -1,4 +1,5 @@
 use merkletree::{Hash, MerkleTree};
+use ark_std::marker::PhantomData;
 use ark_ff::PrimeField;
 use ark_poly::{
     univariate::DensePolynomial, DenseUVPolynomial, EvaluationDomain, GeneralEvaluationDomain,
